@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Chicken</string>
+    <string name="app_id">335047060001571</string>
+    <string name="action_settings">Settings</string>
+    <string name="login">Log In</string>
+    <string name="logout">Log Out</string>
+    <string name="login_intro">Log into Facebook below.</string>
+    <string name="gender">Gender</string>
+    <string name="email">Email</string>
+    
+</resources>
