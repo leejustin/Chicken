@@ -68,26 +68,48 @@ public class LoginActivity extends Activity {
 		List<String> permissions = Arrays.asList("public_profile", "email");
 		// NOTE: for extended permissions, like "user_about_me", your app must be reviewed by the Facebook team
 		// (https://developers.facebook.com/docs/facebook-login/permissions/)
-		
+
 		ParseFacebookUtils.logIn(permissions, this, new LogInCallback() {
 			@Override
 			public void done(ParseUser user, ParseException err) {
 				LoginActivity.this.progressDialog.dismiss();
+
+                //Fetch from Parse if this user is admin or not
+                Boolean isUserAdmin = (Boolean)user.get("admin");
+
 				if (user == null) {
 					Log.d(FacebookHandler.TAG, "User cancelled Facebook login");
 				} else if (user.isNew()) {
 					Log.d(FacebookHandler.TAG, "User signed up and logged in through Facebook");
-					loadAdminMenu();
+                    if (isUserAdmin) {
+                        loadAdminMenu();
+                    }
+                    else {
+                        loadUserMenu();
+                    }
+
 				} else {
 					Log.d(FacebookHandler.TAG, "User logged in through Facebook");
-					loadAdminMenu();
+                    if (isUserAdmin) {
+                        loadAdminMenu();
+                    }
+                    else {
+                        loadUserMenu();
+                    }
 				}
 			}
 		});
 	}
 
+    //Load Activity for Admin
 	private void loadAdminMenu() {
 		Intent intent = new Intent(this, AdminMenuActivity.class);
 		startActivity(intent);
 	}
+
+    //Load the Activity for User
+    private void loadUserMenu() {
+        Intent intent = new Intent(this, UserMenuActivity.class);
+        startActivity(intent);
+    }
 }

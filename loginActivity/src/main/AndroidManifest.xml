@@ -4,20 +4,28 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="19" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    
-    <uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="21" />
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="21" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="21" />
 
     <application
+        android:name="com.sinkwater.chicken.FacebookHandler"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="com.sinkwater.chicken.FacebookHandler" >
+        android:theme="@style/AppTheme" >
         <activity
             android:name="com.sinkwater.chicken.LoginActivity"
             android:label="@string/app_name"
@@ -28,13 +36,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity 
+        <activity
             android:name="com.sinkwater.chicken.AdminMenuActivity"
-            android:label="@string/app_name"/>
-        <activity android:name="com.facebook.LoginActivity"
-                  android:label="@string/app_name" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId" 
-            android:value="@string/app_id"/>
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.LoginActivity"
+            android:label="@string/app_name" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+
+        <activity
+            android:name="com.sinkwater.chicken.UserMenuActivity"
+            android:label="@string/title_activity_user_menu" >
+        </activity>
     </application>
 
 </manifest>

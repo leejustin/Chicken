@@ -9,5 +9,7 @@
     <string name="login_intro">Log into Facebook below.</string>
     <string name="gender">Gender</string>
     <string name="email">Email</string>
-    
+    <string name="title_activity_user_menu">UserMenuActivity</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>

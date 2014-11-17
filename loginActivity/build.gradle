@@ -21,4 +21,6 @@ android {
 dependencies {
     compile project(':facebookSDK')
     compile files('libs/Parse-1.7.1.jar')
+    compile 'com.android.support:appcompat-v7:19.0.0'
+    compile 'com.android.support:support-v4:19.0.0'
 }
