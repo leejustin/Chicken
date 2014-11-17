@@ -27,6 +27,4 @@ public class AdminPerson extends Person {
         this.organization = org;
     }
 
-
-
 }
