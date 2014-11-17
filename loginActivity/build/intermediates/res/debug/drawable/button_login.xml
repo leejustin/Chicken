@@ -6,4 +6,4 @@
           android:state_focused="true" />
     <item android:drawable="@drawable/login_button_normal" />
 </selector>
-<!-- From: file:/Users/justin/Development/Chicken_Project/loginActivity/src/main/res/drawable/button_login.xml -->
+<!-- From: file:/C:/Users/dongjin/Documents/UCLA/csM117/project/Chicken/loginActivity/src/main/res/drawable/button_login.xml -->
