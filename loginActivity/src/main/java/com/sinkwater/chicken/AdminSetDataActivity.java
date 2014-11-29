@@ -52,7 +52,7 @@ public class AdminSetDataActivity extends Activity {
 
         if (orgNameText.length() > 0 && orgIdText.length() > 0) {
             // Loads up the next activity and also passes data on
-            Intent loadGPS = new Intent(this, UserMenuActivity.class); //TODO. USERMENUACTIVITY IS A PLACEHOLDER!!!
+            Intent loadGPS = new Intent(this, AdminMapActivity.class);
 
             loadGPS.putExtra("orgName", orgNameText);
             loadGPS.putExtra("orgId", orgIdText);
