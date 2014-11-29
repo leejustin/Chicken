@@ -27,7 +27,7 @@ public class AdminSetDataActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_set_data);
 
-        //Get Android intent data
+        //Get Android intent data if any will be needed later...
         //Intent intent = getIntent();
 
         //Sets up the editText fields
@@ -35,7 +35,7 @@ public class AdminSetDataActivity extends Activity {
         orgId = (EditText)findViewById(R.id.orgId);
 
         //Sets up the button and its methods
-        nextButton = (Button) findViewById(R.id.loginButton);
+        nextButton = (Button) findViewById(R.id.next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +57,7 @@ public class AdminSetDataActivity extends Activity {
             loadGPS.putExtra("orgName", orgNameText);
             loadGPS.putExtra("orgId", orgIdText);
 
-            //Load up the Activity that has the GPS settings
+            //Load up the Activity that has the GPS settings           //TODO. Note that the next activity should change DB table
             startActivity(loadGPS);
         }
 

@@ -76,13 +76,20 @@ public class LoginActivity extends Activity {
 
                 //Fetch from Parse if this user is admin or not
                 Boolean isUserAdmin = (Boolean)user.get("admin");
+                String userOrg = (String)user.get("organization");
 
 				if (user == null) {
 					Log.d(FacebookHandler.TAG, "User cancelled Facebook login");
 				} else if (user.isNew()) {
 					Log.d(FacebookHandler.TAG, "User signed up and logged in through Facebook");
                     if (isUserAdmin) {
-                        loadAdminMenu();
+                        //If admin isn't associated with an org, they need to set their data
+                        if (userOrg != null) {
+                            loadAdminMenu();
+                        }
+                        else {
+                            loadAdminSetData();
+                        }
                     }
                     else {
                         loadUserMenu();
@@ -91,7 +98,13 @@ public class LoginActivity extends Activity {
 				} else {
 					Log.d(FacebookHandler.TAG, "User logged in through Facebook");
                     if (isUserAdmin) {
-                        loadAdminMenu();
+                        //If admin isn't associated with an org, they need to set their data
+                        if (userOrg != null) {
+                            loadAdminMenu();
+                        }
+                        else {
+                            loadAdminSetData();
+                        }
                     }
                     else {
                         loadUserMenu();
@@ -106,6 +119,12 @@ public class LoginActivity extends Activity {
 		Intent intent = new Intent(this, AdminMenuActivity.class);
 		startActivity(intent);
 	}
+
+    //Load Activity for Admin to set settings
+    private void loadAdminSetData() {
+        Intent intent = new Intent(this, AdminSetDataActivity.class);
+        startActivity(intent);
+    }
 
     //Load the Activity for User
     private void loadUserMenu() {
