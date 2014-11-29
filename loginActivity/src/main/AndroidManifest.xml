@@ -51,6 +51,10 @@
             android:name="com.sinkwater.chicken.UserMenuActivity"
             android:label="@string/title_activity_user_menu" >
         </activity>
+        <activity
+            android:name="com.sinkwater.chicken.AdminSetDataActivity"
+            android:label="@string/title_activity_admin_set_data" >
+        </activity>
     </application>
 
 </manifest>
