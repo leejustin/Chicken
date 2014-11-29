@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+//import com.google.android.gms.maps.model.LatLng;
+
 
 import com.parse.LogInCallback;
 import com.parse.Parse;
@@ -24,7 +27,12 @@ public class LoginActivity extends Activity {
 
 	private Button loginButton;
 	private Dialog progressDialog;
+
     private Button adminMapButton;
+
+    GPSManager gpsM;
+    GPSData data = new GPSData(0.0,0.0);
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,20 @@ public class LoginActivity extends Activity {
 			// Go to the user info activity
 			loadAdminMenu();
 		}
+
+
+        // This makes a Toast that displays GPS coordinates.
+        //
+       // gpsM = new GPSManager(LoginActivity.this);
+
+       // if(gpsM.canGetLocation()) {
+
+       //     double latitude = gpsM.getLatitude();
+       //     double longitude = gpsM.getLongitude();
+
+       //     Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+       // }
+
 	}
 
 	@Override
