@@ -12,5 +12,6 @@
     <string name="title_activity_user_menu">UserMenuActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_admin_set_data">AdminSetDataActivity</string>
+    <string name="title_activity_admin_map">AdminMapActivity</string>
 
 </resources>
