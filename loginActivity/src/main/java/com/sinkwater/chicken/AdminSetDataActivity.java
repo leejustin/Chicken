@@ -5,11 +5,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.View;
+
+import android.content.Context;
+
+import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
 
 /*
  * allows the user to set data on the Group and then passes the data with an intent to the map for GPS
  */
 public class AdminSetDataActivity extends Activity {
+
+    private Button nextButton;
+    private EditText orgName;
+    private EditText orgId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +28,49 @@ public class AdminSetDataActivity extends Activity {
         setContentView(R.layout.activity_admin_set_data);
 
         //Get Android intent data
-        Intent intent = getIntent();
+        //Intent intent = getIntent();
+
+        //Sets up the editText fields
+        orgName = (EditText)findViewById(R.id.orgName);
+        orgId = (EditText)findViewById(R.id.orgId);
+
+        //Sets up the button and its methods
+        nextButton = (Button) findViewById(R.id.loginButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNextButtonClicked();
+            }
+        });
     }
 
+    //If text fields aren't null, then we can pass the intent to the next activity
+    private void onNextButtonClicked() {
+
+        String orgNameText = orgName.getText().toString();
+        String orgIdText = orgId.getText().toString();
+
+        if (orgNameText.length() > 0 && orgIdText.length() > 0) {
+            // Loads up the next activity and also passes data on
+            Intent loadGPS = new Intent(this, UserMenuActivity.class); //TODO. USERMENUACTIVITY IS A PLACEHOLDER!!!
+
+            loadGPS.putExtra("orgName", orgNameText);
+            loadGPS.putExtra("orgId", orgIdText);
+
+            //Load up the Activity that has the GPS settings
+            startActivity(loadGPS);
+        }
+
+        else {
+            //Load up an error
+            Context context = getApplicationContext();
+            CharSequence text = "Error: Both parameters need to be filled";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
