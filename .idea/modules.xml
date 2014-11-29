@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/Chicken_Project.iml" filepath="$PROJECT_DIR$/Chicken_Project.iml" />
       <module fileurl="file://$PROJECT_DIR$/facebookSDK/facebookSDK.iml" filepath="$PROJECT_DIR$/facebookSDK/facebookSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/loginActivity/loginActivity.iml" filepath="$PROJECT_DIR$/loginActivity/loginActivity.iml" />
-      <module fileurl="file://$PROJECT_DIR$/loginActivity/loginActivity.iml" filepath="$PROJECT_DIR$/loginActivity/loginActivity.iml" />
     </modules>
   </component>
 </project>
