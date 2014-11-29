@@ -24,6 +24,7 @@ public class LoginActivity extends Activity {
 
 	private Button loginButton;
 	private Dialog progressDialog;
+    private Button adminMapButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,13 @@ public class LoginActivity extends Activity {
 				onLoginButtonClicked();
 			}
 		});
+        adminMapButton = (Button) findViewById(R.id.AdminMapButton);
+        adminMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAdminMapClicked();
+            }
+        });
 
 		// Check if there is a currently logged in user
 		// and it's linked to a Facebook account.
@@ -60,6 +68,12 @@ public class LoginActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
 	}
+
+    private void onAdminMapClicked() {
+        Intent intent = new Intent(this, AdminMapActivity.class);
+        startActivity(intent);
+    }
+
 
 	private void onLoginButtonClicked() {
 		LoginActivity.this.progressDialog = 

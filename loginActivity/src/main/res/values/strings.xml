@@ -9,8 +9,13 @@
     <string name="login_intro">Log into Facebook below.</string>
     <string name="gender">Gender</string>
     <string name="email">Email</string>
+<<<<<<< HEAD
     <string name="title_activity_user_menu">UserMenuActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_admin_set_data">AdminSetDataActivity</string>
+=======
+    <string name="title_activity_admin_map">AdminMapActivity</string>
+    <string name="hello_world">Hello world!</string>
+>>>>>>> remotes/origin/GoogleMaps
 
 </resources>
