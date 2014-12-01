@@ -23,6 +23,8 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.sinkwater.chicken.R;
 
+import com.sinkwater.chicken.db_handler.ParseDataHandler;
+
 public class LoginActivity extends Activity {
 
 	private Button loginButton;
@@ -62,6 +64,9 @@ public class LoginActivity extends Activity {
 			// Go to the user info activity
 			loadAdminMenu();
 		}
+
+      //  ParseDataHandler test =  new ParseDataHandler();
+
 
 
         // This makes a Toast that displays GPS coordinates.

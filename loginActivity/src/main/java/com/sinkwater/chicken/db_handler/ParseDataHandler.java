@@ -10,7 +10,9 @@ import com.parse.ParseQuery;
  */
 public class ParseDataHandler {
 
-
+    public ParseDataHandler() {
+        //
+    }
 
 
     //Need function to get data about an organization.
@@ -30,6 +32,16 @@ public class ParseDataHandler {
         orgData.put("longitude", longitude);
 
         orgData.saveInBackground();
+    }
+
+    public void addUserOrg(String username, String generalId) {
+
+        //Set up data on user's organization. User should be Parse username key
+        ParseObject userOrg = new ParseObject("UserOrg");
+        userOrg.put("username", username);
+        userOrg.put("generalId", generalId);
+
+        userOrg.saveInBackground();
     }
 
 }
