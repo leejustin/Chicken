@@ -1,6 +1,28 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/string_button_find"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/string_button_find"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/enter_location" />
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/enter_location"
+            android:hint="@string/enter_location"
+            android:inputType="text"
+            android:layout_toLeftOf="@id/string_button_find"
+            />
+    </RelativeLayout>
+
 
     <fragment
         android:id="@+id/mapView"
@@ -8,4 +30,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</RelativeLayout>
+</LinearLayout>
