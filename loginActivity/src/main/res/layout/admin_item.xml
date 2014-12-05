@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/text"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="5sp"
+    android:textSize="25sp" >
+
+</TextView>
+<!--
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:padding="6dp" >
+
+<TextView
+    android:id="@+id/user_name"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#D8000000"
+    android:textSize="16sp"
+    android:textStyle="bold" />
+
+<TextView
+    android:id="@+id/attendance_count"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/user_name"
+    android:ellipsize="marquee"
+    android:lines="3"
+    android:marqueeRepeatLimit="marquee_forever"
+    android:textColor="#D8000000"
+    android:textSize="12sp" />
+
+</RelativeLayout>
+-->

@@ -3,14 +3,18 @@
     xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
+    android:orientation="vertical"
+    android:weightSum="1">
+    <!--android:id="@+id/?"
+    android:weightSum="1">
+-->
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
+        <!--android:id="@+id/">-->
             <com.facebook.widget.ProfilePictureView
                 android:id="@+id/userProfilePicture"
                 android:layout_height="wrap_content"
@@ -27,7 +31,7 @@
                 android:textColor="#333"
                 android:textSize="18sp" />
     </LinearLayout>
-        
+        <!--
     <TableLayout
         android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,25 +85,38 @@
                 android:textSize="16sp" />
         </TableRow>
     </TableLayout>
-
+    -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="YOU ARE AN ADMIN"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
+        android:text="Users and Attendance"
+        android:id="@+id/header"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="198dp"
+        android:id="@+id/listView"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.45" />
 
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:text="@string/logout"
         android:textColor="#fff"
-        android:layout_gravity="center_horizontal"
         android:background="@drawable/button_login"
-        />
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/updateOrg"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

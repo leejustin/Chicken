@@ -2,8 +2,7 @@ package com.sinkwater.chicken.db_handler;
 
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
+import com.parse.*;
 
 /**
  * Created by justin on 11/16/14.
@@ -14,15 +13,28 @@ public class ParseDataHandler {
         //
     }
 
+/* FUCK
+    //Get information on organization
+    public ParseObject getOrg(String objectId) {
 
-    //Need function to get data about an organization.
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Organization");
+        query.getInBackground(objectId, new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    //object is value
+                    //result = object;
 
+                } else {
+                    //error
+                }
+            }
+        });
 
-
-
+        return null;
+    }
+*/
     //Set Parse organization information
-  //  ParseQuery<ParseObject> query = ParseQuery.getQuery("")
-    public void createOrg(String orgName, String generalId, double latitude, double longitude) {
+    public void addOrg(String orgName, String generalId, double latitude, double longitude) {
 
         //Set up data on organization
         ParseObject orgData = new ParseObject("Organization");
