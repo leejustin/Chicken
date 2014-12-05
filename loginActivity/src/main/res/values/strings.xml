@@ -13,5 +13,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_admin_set_data">AdminSetDataActivity</string>
     <string name="title_activity_admin_map">AdminMapActivity</string>
+    <string name="string_button_find">Find</string>
+    <string name="enter_location">Enter Location</string>
 
 </resources>
