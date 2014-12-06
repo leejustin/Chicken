@@ -41,6 +41,7 @@ public class AdminMenuActivity extends Activity {
 	private TextView userGenderView;
 	private TextView userEmailView;
 	private Button logoutButton;
+    private Button setButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,14 @@ public class AdminMenuActivity extends Activity {
 				onLogoutButtonClicked();
 			}
 		});
+
+        setButton = (Button) findViewById(R.id.updateOrg);
+        setButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadAdminSetData();
+            }
+        });
 
 		// Fetch Facebook user info if the session is active
 		Session session = ParseFacebookUtils.getSession();
@@ -234,4 +243,9 @@ public class AdminMenuActivity extends Activity {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
 	}
+
+    private void loadAdminSetData() {
+        Intent intent = new Intent(this, AdminSetDataActivity.class);
+        startActivity(intent);
+    }
 }
