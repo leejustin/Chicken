@@ -84,9 +84,6 @@ public class AdminMenuActivity extends Activity {
         //Get the administrator's associated organization
         String currentUserOrg = (String)currentUser.get("organization");
 
-        System.out.println("SUP!!! " + currentUserOrg);
-
-        currentUserOrg = "CS130F2014"; //TODO
         //Get a list of user's who are associated with administrator's organization
         ParseQuery<ParseObject> query = ParseQuery.getQuery("UserOrg");
         query.whereEqualTo("generalId",currentUserOrg);
@@ -191,8 +188,6 @@ public class AdminMenuActivity extends Activity {
 
 	private void updateViewsWithProfileInfo() {
 		ParseUser currentUser = ParseUser.getCurrentUser();
-
-        String test = (String)currentUser.get("organization");
 
 		if (currentUser.has("profile")) {
 			JSONObject userProfile = currentUser.getJSONObject("profile");
