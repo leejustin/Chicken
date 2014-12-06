@@ -125,7 +125,7 @@ public class LoginActivity extends Activity {
 					Log.d(FacebookHandler.TAG, "User signed up and logged in through Facebook");
                     if (isUserAdmin) {
                         //If admin isn't associated with an org, they need to set their data
-                        if (userOrg != null) {
+                        if (userOrg.length() > 0 ) {
                             loadAdminMenu();
                         }
                         else {
@@ -140,7 +140,7 @@ public class LoginActivity extends Activity {
 					Log.d(FacebookHandler.TAG, "User logged in through Facebook");
                     if (isUserAdmin) {
                         //If admin isn't associated with an org, they need to set their data
-                        if (userOrg != null) {
+                        if (userOrg.length() > 0) {
                             loadAdminMenu();
                         }
                         else {
