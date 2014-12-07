@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,8 @@ import java.util.List;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
@@ -38,27 +41,33 @@ public class UserMenuActivity extends Activity {
 
     private ProfilePictureView userProfilePictureView;
     private TextView userNameView;
-    private TextView userGenderView;
-    private TextView userEmailView;
+    //private TextView userGenderView;
+    //private TextView userEmailView;
     private Button logoutButton;
-    private Button setButton;
+    private Button searchButton;
+    private EditText searchQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usermenu);
 
-
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.usermenu);
-
+        searchQuery = (EditText)findViewById(R.id.searchQuery);
        // setParseData();
 
         userProfilePictureView = (ProfilePictureView) findViewById(R.id.userProfilePicture);
         userNameView = (TextView) findViewById(R.id.userName);
         //userGenderView = (TextView) findViewById(R.id.userGender);
         //userEmailView = (TextView) findViewById(R.id.userEmail);
+
+        searchButton = (Button) findViewById(R.id.searchOrgs);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String passValue = searchQuery.getText().toString();
+                searchOrg(passValue);
+            }
+        });
 
         logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +87,8 @@ public class UserMenuActivity extends Activity {
     private void setParseData() {
         //nothing lol
     }
+
+
 
 
     @Override
@@ -180,6 +191,19 @@ public class UserMenuActivity extends Activity {
             }
         }
     }
+
+    //Takes in the search parameter and passes it to the next activity
+    private void searchOrg(String query) {
+        //Make sure the string passed in is valid
+        if (query != null || query.length() > 0) {
+
+            //Passes query to the activity that will use it to query search results
+            Intent intent = new Intent(this, UserOrgSearchActivity.class);
+            intent.putExtra("query", query);
+            startActivity(intent);
+        }
+    }
+
 
     private void onLogoutButtonClicked() {
         // Log the user out
