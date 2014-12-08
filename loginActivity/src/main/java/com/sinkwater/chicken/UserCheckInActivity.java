@@ -11,6 +11,7 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.lang.Math;
 
@@ -65,6 +66,7 @@ public class UserCheckInActivity extends Activity {
                     if(distance <= range){
                         Toast.makeText(getApplicationContext(),
                                 "In range for " + orgId, Toast.LENGTH_LONG).show();
+                        updateAttendance(orgId);
                     } else{
                         Toast.makeText(getApplicationContext(),
                                 "Not in range for " + orgId, Toast.LENGTH_LONG).show();
@@ -80,8 +82,29 @@ public class UserCheckInActivity extends Activity {
 
     public void updateAttendance(String orgId)
     {
+        //get current user's username
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        String username = currentUser.getUsername();
 
-
+        //find UserOrg object for this user and organization
+        ParseQuery<ParseObject> userOrgQuery = ParseQuery.getQuery("UserOrg");
+        userOrgQuery.whereEqualTo("username",username);
+        userOrgQuery.whereEqualTo("generalId",orgId);
+        userOrgQuery.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject userOrg, ParseException e) {
+                if(e == null) {
+                    //increase attendance by one
+                    int attendCount = userOrg.getInt("attendance");
+                    userOrg.put("attendance", ++attendCount);
+                    userOrg.saveInBackground();
+                    Toast.makeText(getApplicationContext(),
+                            "Attendance updated", Toast.LENGTH_LONG).show();
+                } else{
+                    //error
+                }
+            }
+        });
     }
 
 

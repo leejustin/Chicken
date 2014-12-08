@@ -230,8 +230,8 @@ public class UserMenuActivity extends Activity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             int itemPosition = position;
                             String itemValue = (String)listview.getItemAtPosition(position);
-                            Toast.makeText(getApplicationContext(),"Position: " + itemPosition +
-                                    " ListItem: " + itemValue, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(),"Position: " + itemPosition +
+                            //        " ListItem: " + itemValue, Toast.LENGTH_LONG).show();
                             String[] orgId = itemValue.split(" ");
                             checkIn(orgId[0]);
                         }
