@@ -2,16 +2,26 @@ package com.sinkwater.chicken;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.app.Activity;
 import java.util.List;
 import com.parse.*;
+import com.sinkwater.chicken.db_handler.ParseDataHandler;
 
 import java.util.List;
+
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class UserOrgSearchActivity extends Activity {
 
@@ -32,7 +42,7 @@ public class UserOrgSearchActivity extends Activity {
         }
 
         setParseData(orgQuery);
-        System.out.println(orgQuery);
+
     }
 
     private void setParseData(String searchQuery) {
@@ -42,7 +52,7 @@ public class UserOrgSearchActivity extends Activity {
             public void done(List<ParseObject> queryList, ParseException e) {
                 if (e == null) {
                     //success
-                    System.out.println("bs");
+                    //System.out.println("bs");
                     //Bind results here
 
                     listview = (ListView)findViewById(R.id.classList);
@@ -53,12 +63,78 @@ public class UserOrgSearchActivity extends Activity {
                         adapter.add(item);
                     }
                     listview.setAdapter(adapter);
+
+                    listview.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view,
+                                                int position, long id) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Class added", Toast.LENGTH_LONG)
+                                    .show();
+                            onItemClicked(parent, view, position, id);
+
+                        }
+                    });
+
                 } else {
                     //failed
                     System.out.println("fuceked up");
                 }
             }
         });
+    }
+
+    public void onItemClicked(AdapterView<?> l, View v, int position, long id) {
+        Log.i("clicking thing", "clicked the item: " + id + " at pos: " + position);
+
+        String orgName = (String)l.getItemAtPosition(position);
+
+        /* Create a new org that the user is associated with. TODO need to do something to check for
+        making sure that the item doesnt already exist in the DB--except i really dont care to implement it right now
+         */
+        System.out.println("LOOOOLLL");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Organization");
+        query.whereContains("name", orgName);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> queryList, ParseException e) {
+                if (e == null) {
+                    String orgId;
+
+                    //get the associated value for organization
+                    orgId = queryList.get(0).getString("generalId");
+
+                    //get the associated value for user ID
+                    ParseUser currentUser = ParseUser.getCurrentUser();
+                    String username = (String)currentUser.get("username");
+
+                    //get the user's display name
+                    JSONObject userProfile = currentUser.getJSONObject("profile");
+
+                    String displayName;
+                    try {
+                        displayName = userProfile.getString("name");
+                    }
+                    catch (JSONException d) {
+                        //you fucked up TODO error catching
+                        displayName = "broken";
+                    }
+
+
+                    ParseDataHandler userOrg = new ParseDataHandler();
+                    //push the data
+                    userOrg.addUserOrg(username, orgId, displayName);
+
+                } else {
+                    //failed
+                    System.out.println("fuceked up");
+                }
+            }
+        });
+
+
+        Intent intent = new Intent(this, UserMenuActivity.class);
+        //intent.putExtra("theClass", theClass);
+        startActivity(intent);
     }
 
     @Override

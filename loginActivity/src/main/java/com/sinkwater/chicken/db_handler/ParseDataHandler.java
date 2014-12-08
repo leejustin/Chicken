@@ -46,12 +46,14 @@ public class ParseDataHandler {
         orgData.saveInBackground();
     }
 
-    public void addUserOrg(String username, String generalId) {
+    public void addUserOrg(String username, String generalId, String displayName) {
 
         //Set up data on user's organization. User should be Parse username key
         ParseObject userOrg = new ParseObject("UserOrg");
         userOrg.put("username", username);
         userOrg.put("generalId", generalId);
+        userOrg.put("attendance", 0);
+        userOrg.put("displayName", displayName);
 
         userOrg.saveInBackground();
     }

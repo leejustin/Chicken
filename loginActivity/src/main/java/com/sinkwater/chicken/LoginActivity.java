@@ -22,6 +22,7 @@ import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.sinkwater.chicken.R;
+import com.sinkwater.chicken.db_handler.ParseDataHandler;
 
 import com.sinkwater.chicken.db_handler.ParseDataHandler;
 
