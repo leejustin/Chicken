@@ -10,9 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import java.util.List;
+import java.lang.Math;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.view.LayoutInflater;
+import android.widget.Toast;
 
 import com.facebook.FacebookRequestError;
 import com.facebook.Request;
@@ -213,17 +216,33 @@ public class UserMenuActivity extends Activity {
                             R.layout.user_item);
                     //Set the objects and bind them
                     for(ParseObject userOrg: parseObjects){
-                        String classId = userOrg.getString("generalId");
+                        //or should it be the name and not the id
+                        String orgId = userOrg.getString("generalId");
                         String attenCount = userOrg.get("attendance").toString();
-                        String final_displayName = classId + " - Attendance: " + attenCount;
+                        String final_displayName = orgId + " - Attendance: " + attenCount;
                         adapter.add(final_displayName);
                     }
                     listview.setAdapter(adapter);
+
+                    //Click listview item -> toast of what was clicked
+                    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            int itemPosition = position;
+                            String itemValue = (String)listview.getItemAtPosition(position);
+                            Toast.makeText(getApplicationContext(),"Position: " + itemPosition +
+                                    " ListItem: " + itemValue, Toast.LENGTH_LONG).show();
+                            String[] orgId = itemValue.split(" ");
+                            checkIn(orgId[0]);
+                        }
+                    });
                 }else{
                     //error
                 }
             }
         });
+
+
     }
 
     //Takes in the search parameter and passes it to the next activity
@@ -233,6 +252,17 @@ public class UserMenuActivity extends Activity {
 
             //Passes query to the activity that will use it to query search results
             Intent intent = new Intent(this, UserOrgSearchActivity.class);
+            intent.putExtra("query", query);
+            startActivity(intent);
+        }
+    }
+
+    private void checkIn(String query){
+        //Make sure the string passed in is valid
+        if (query != null || query.length() > 0) {
+
+            //Passes query to the activity that will use it to query search results
+            Intent intent = new Intent(this, UserCheckInActivity.class);
             intent.putExtra("query", query);
             startActivity(intent);
         }

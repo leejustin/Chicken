@@ -72,6 +72,10 @@
             android:name="com.sinkwater.chicken.UserOrgSearchActivity"
             android:label="@string/title_activity_user_org_search" >
         </activity>
+        <activity
+            android:name="com.sinkwater.chicken.UserCheckInActivity"
+            android:label="@string/title_activity_user_check_in" >
+        </activity>
     </application>
 
 </manifest>

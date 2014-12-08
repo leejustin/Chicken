@@ -16,5 +16,6 @@
     <string name="string_button_find">Find</string>
     <string name="enter_location">Enter Location</string>
     <string name="title_activity_user_org_search">UserOrgSearchActivity</string>
+    <string name="title_activity_user_check_in">UserCheckInActivity</string>
 
 </resources>
