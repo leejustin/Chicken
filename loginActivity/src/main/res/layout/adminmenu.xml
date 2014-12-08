@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#fff1c232">
     <!--android:id="@+id/?"
     android:weightSum="1">
 -->
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
         <!--android:id="@+id/">-->
@@ -92,21 +93,24 @@
         android:text="Users and Attendance"
         android:id="@+id/header"
         android:layout_gravity="center_horizontal"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold" />
 
     <ListView
-        android:layout_width="match_parent"
+        android:layout_width="340dp"
         android:layout_height="198dp"
         android:id="@+id/listView"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.45" />
+        android:layout_gravity="center"
+        android:background="#FFFFFF"
+        android:layout_marginTop="20dp" />
 
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:text="@string/logout"
         android:textColor="#fff"
         android:background="@drawable/button_login"
