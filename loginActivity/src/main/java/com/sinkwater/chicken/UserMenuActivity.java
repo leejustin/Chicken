@@ -100,6 +100,7 @@ public class UserMenuActivity extends Activity {
             // Check if the user is currently logged
             // and show any cached content
             updateViewsWithProfileInfo();
+            updateViewsWithOrgInfo();
         } else {
             // If the user is not logged in, go to the
             // activity showing the login view.
@@ -133,6 +134,7 @@ public class UserMenuActivity extends Activity {
 
                                 // Show the user info
                                 updateViewsWithProfileInfo();
+                                updateViewsWithOrgInfo();
                             } catch (JSONException e) {
                                 Log.d(FacebookHandler.TAG, "Error parsing returned user data. " + e);
                             }
@@ -190,6 +192,38 @@ public class UserMenuActivity extends Activity {
                 Log.d(FacebookHandler.TAG, "Error parsing saved user data.");
             }
         }
+
+
+    }
+
+    private void updateViewsWithOrgInfo(){
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+       //Get a list of organizations that the user is associated with
+        ParseQuery<ParseObject> userOrgQuery = ParseQuery.getQuery("UserOrg");
+        userOrgQuery.whereEqualTo("username",currentUser.getString("username"));
+        userOrgQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+                if(e == null){
+
+                    //Get the list view and pass results to an array adapter
+                    listview = (ListView) findViewById(R.id.listView2);
+                    adapter = new ArrayAdapter<String>(UserMenuActivity.this,
+                            R.layout.user_item);
+                    //Set the objects and bind them
+                    for(ParseObject userOrg: parseObjects){
+                        String classId = userOrg.getString("generalId");
+                        String attenCount = userOrg.get("attendance").toString();
+                        String final_displayName = classId + " - Attendance: " + attenCount;
+                        adapter.add(final_displayName);
+                    }
+                    listview.setAdapter(adapter);
+                }else{
+                    //error
+                }
+            }
+        });
     }
 
     //Takes in the search parameter and passes it to the next activity
