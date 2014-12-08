@@ -204,7 +204,6 @@ public class UserMenuActivity extends Activity {
         }
     }
 
-
     private void onLogoutButtonClicked() {
         // Log the user out
         ParseUser.logOut();

@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/searchQuery"
         android:layout_gravity="center_horizontal"
-        android:text="search shit" />
+        android:text="search" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
