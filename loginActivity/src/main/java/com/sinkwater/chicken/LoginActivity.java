@@ -117,7 +117,7 @@ public class LoginActivity extends Activity {
 				LoginActivity.this.progressDialog.dismiss();
 
                 //Fetch from Parse if this user is admin or not
-                Boolean isUserAdmin = (Boolean)user.get("admin");
+                Boolean isUserAdmin = (Boolean)user.get("admin")!=null? (Boolean)user.get("admin"): false;
                 String userOrg = (String)user.get("organization");
 
 				if (user == null) {
@@ -126,7 +126,7 @@ public class LoginActivity extends Activity {
 					Log.d(FacebookHandler.TAG, "User signed up and logged in through Facebook");
                     if (isUserAdmin) {
                         //If admin isn't associated with an org, they need to set their data
-                        if (userOrg.length() > 0 ) {
+                        if (userOrg!=null && userOrg.length() > 0 ) {
                             loadAdminMenu();
                         }
                         else {
@@ -141,7 +141,7 @@ public class LoginActivity extends Activity {
 					Log.d(FacebookHandler.TAG, "User logged in through Facebook");
                     if (isUserAdmin) {
                         //If admin isn't associated with an org, they need to set their data
-                        if (userOrg.length() > 0) {
+                        if (userOrg!=null && userOrg.length() > 0) {
                             loadAdminMenu();
                         }
                         else {

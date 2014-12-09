@@ -58,9 +58,13 @@ public class UserOrgSearchActivity extends Activity {
                     listview = (ListView)findViewById(R.id.classList);
                     adapter = new ArrayAdapter<String>(UserOrgSearchActivity.this,
                             R.layout.user_org_item);
-                    for (ParseObject orbj : queryList) {
-                        String item = orbj.getString("name");
-                        adapter.add(item);
+                    if(queryList.isEmpty()) {
+                        adapter.add("No class is found");
+                    } else {
+                        for (ParseObject orbj : queryList) {
+                            String item = orbj.getString("name");
+                            adapter.add(item);
+                        }
                     }
                     listview.setAdapter(adapter);
 
@@ -78,7 +82,7 @@ public class UserOrgSearchActivity extends Activity {
 
                 } else {
                     //failed
-                    System.out.println("fuceked up");
+                    System.out.println("fucked up");
                 }
             }
         });

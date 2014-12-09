@@ -2,6 +2,7 @@ package com.sinkwater.chicken;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -23,6 +24,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+import com.parse.ParseUser;
+import com.sinkwater.chicken.db_handler.ParseDataHandler;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,6 +35,10 @@ public class AdminMapActivity extends Activity implements OnMapLongClickListener
     GoogleMap googleMap;
     MarkerOptions searchMarkerOptions;
     LatLng latLng;
+    Button selectButton;
+    String orgName;
+    String orgId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +72,43 @@ public class AdminMapActivity extends Activity implements OnMapLongClickListener
             }
         };
         button_find.setOnClickListener(findClickListener);
+
+        //enable select button
+        selectButton = (Button) findViewById(R.id.button_select);
+        OnClickListener selectClickListener = new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateDB();
+            }
+        };
+        selectButton.setOnClickListener(selectClickListener);
+
+        //get the intent
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            orgName = extras.getString("orgName");
+            orgId = extras.getString("orgId");
+        } else {
+            orgName = "default name";
+            orgId = "default id";
+        }
     }
+
+    public void loadAdminMenuActivity() {
+        Intent intent = new Intent(this, AdminMenuActivity.class);
+        startActivity(intent);
+    }
+
+
+
+    public void updateDB() {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        currentUser.put("organization", orgId); //update the user's organization
+        currentUser.saveInBackground();
+        ParseDataHandler.addOrg(orgName, orgId, searchMarkerOptions.getPosition().latitude, searchMarkerOptions.getPosition().longitude); //add a row in Organization table
+        loadAdminMenuActivity();
+    }
+
 
     // Not used for now
     private void createMapView(){
@@ -107,11 +150,10 @@ public class AdminMapActivity extends Activity implements OnMapLongClickListener
         googleMap.addMarker(searchMarkerOptions
                 .position(latLng)
                 .title(latLng.toString()));
-        Toast.makeText(getBaseContext(), "Marker added at: " + latLng.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(), "Marker added at: " + latLng.toString(), Toast.LENGTH_SHORT).show();
 
     }
     // Click on map to move
-    // TODO: Maybe we do not need this functionality
     @Override
     public void onMapClick(LatLng latLng) {
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -120,7 +162,7 @@ public class AdminMapActivity extends Activity implements OnMapLongClickListener
     @Override
     public boolean onMarkerClick(Marker marker) {
         // TODO: Add functionality so that marker can pass LatLng object
-        Log.w("Click", "test");
+        updateDB();
         return false;
     }
 
@@ -133,7 +175,7 @@ public class AdminMapActivity extends Activity implements OnMapLongClickListener
             List<Address> addresses = null;
 
             try{
-                addresses = geocoder.getFromLocationName(locationNames[0], 3);
+                addresses = geocoder.getFromLocationName(locationNames[0], 1);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -1,8 +1,17 @@
 package com.sinkwater.chicken.db_handler;
 
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.parse.*;
+import com.sinkwater.chicken.R;
+
+
+import java.util.List;
 
 /**
  * Created by justin on 11/16/14.
@@ -34,7 +43,7 @@ public class ParseDataHandler {
     }
 */
     //Set Parse organization information
-    public void addOrg(String orgName, String generalId, double latitude, double longitude) {
+    public static void addOrg(String orgName, String generalId, double latitude, double longitude) {
 
         //Set up data on organization
         ParseObject orgData = new ParseObject("Organization");
@@ -46,7 +55,7 @@ public class ParseDataHandler {
         orgData.saveInBackground();
     }
 
-    public void addUserOrg(String username, String generalId, String displayName) {
+    public static void addUserOrg(String username, String generalId, String displayName) {
 
         //Set up data on user's organization. User should be Parse username key
         ParseObject userOrg = new ParseObject("UserOrg");
@@ -57,5 +66,12 @@ public class ParseDataHandler {
 
         userOrg.saveInBackground();
     }
+
+
+
+
+
+
+
 
 }
