@@ -22,21 +22,9 @@ import java.util.List;
 public class ParseDataHandler {
 
     public ParseDataHandler() {
-        stringVal = null;
-        boolVal = false;
     }
 
-    private boolean boolVal;
-    private String stringVal;
 
-
-    public void setStringVal(String s) {
-        stringVal = s;
-    }
-
-    public void setBoolVal(boolean b) {
-        boolVal = b;
-    }
 
 
     //Set Parse organization information
