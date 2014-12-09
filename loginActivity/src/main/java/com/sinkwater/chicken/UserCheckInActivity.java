@@ -69,9 +69,10 @@ public class UserCheckInActivity extends Activity {
                         updateAttendance(orgId);
                     } else{
                         Toast.makeText(getApplicationContext(),
-                                "Not in range for " + orgId, Toast.LENGTH_LONG).show();
+                                "Not in range for " + orgId + "\nChange location and try again.", Toast.LENGTH_LONG).show();
                     }
-
+                    Intent intent = new Intent(UserCheckInActivity.this, UserMenuActivity.class);
+                    startActivity(intent);
 
                 }else{
                     //error
