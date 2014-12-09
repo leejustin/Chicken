@@ -21,6 +21,7 @@ public class AdminSetDataActivity extends Activity {
     private Button nextButton;
     private EditText orgName;
     private EditText orgId;
+    private EditText orgTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class AdminSetDataActivity extends Activity {
         //Sets up the editText fields
         orgName = (EditText)findViewById(R.id.orgName);
         orgId = (EditText)findViewById(R.id.orgId);
+        orgTime = (EditText)findViewById(R.id.orgTime);
 
         //Sets up the button and its methods
         nextButton = (Button) findViewById(R.id.next_button);
@@ -49,6 +51,7 @@ public class AdminSetDataActivity extends Activity {
 
         String orgNameText = orgName.getText().toString();
         String orgIdText = orgId.getText().toString();
+        String orgTimeText = orgTime.getText().toString();
 
         if (orgNameText.length() > 0 && orgIdText.length() > 0) {
             // Loads up the next activity and also passes data on
@@ -56,15 +59,16 @@ public class AdminSetDataActivity extends Activity {
 
             loadGPS.putExtra("orgName", orgNameText);
             loadGPS.putExtra("orgId", orgIdText);
+            loadGPS.putExtra("orgTime", orgTimeText);
 
-            //Load up the Activity that has the GPS settings           //TODO. Note that the next activity should change DB table
+            //Load up the Activity that has the GPS settings
             startActivity(loadGPS);
         }
 
         else {
             //Load up an error
             Context context = getApplicationContext();
-            CharSequence text = "Error: Both parameters need to be filled";
+            CharSequence text = "Error: All parameters need to be filled";
             int duration = Toast.LENGTH_LONG;
 
             Toast toast = Toast.makeText(context, text, duration);

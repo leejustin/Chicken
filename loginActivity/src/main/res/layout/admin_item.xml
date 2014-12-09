@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:padding="5sp"
-    android:textSize="25sp" >
+    android:textSize="15sp" >
 
 </TextView>
 <!--

@@ -8,6 +8,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import java.sql.Wrapper;
 import java.util.List;
 
 import android.view.LayoutInflater;
@@ -28,6 +30,7 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.parse.*;
 import com.sinkwater.chicken.R;
+import com.sinkwater.chicken.db_handler.ParseDataHandler;
 
 public class AdminMenuActivity extends Activity {
 
@@ -37,11 +40,14 @@ public class AdminMenuActivity extends Activity {
     ArrayAdapter<String> adapter;
 
 	private ProfilePictureView userProfilePictureView;
+    private TextView adminOrgNameView;
+    private TextView adminOrgIdView;
 	private TextView userNameView;
 	private TextView userGenderView;
 	private TextView userEmailView;
 	private Button logoutButton;
     private Button setButton;
+    private ParseDataHandler dataHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +56,13 @@ public class AdminMenuActivity extends Activity {
 
         setParseData();
 
+        dataHandler = new ParseDataHandler();
 		userProfilePictureView = (ProfilePictureView) findViewById(R.id.userProfilePicture);
 		userNameView = (TextView) findViewById(R.id.userName);
-		//userGenderView = (TextView) findViewById(R.id.userGender);
-		//userEmailView = (TextView) findViewById(R.id.userEmail);
+		adminOrgNameView = (TextView) findViewById(R.id.adminOrgName);
+        adminOrgIdView = (TextView) findViewById(R.id.adminOrgId);
+
+        setOrg();
 
 		logoutButton = (Button) findViewById(R.id.logoutButton);
 		logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +86,19 @@ public class AdminMenuActivity extends Activity {
 			makeMeRequest();
 		}
 	}
+
+    //retrieve the name and id of the admin's organization
+    private void setOrg() {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        String orgIdStr = (String) currentUser.get("organization");
+        WrapperObject<String> orgNameWrapper = new WrapperObject();
+        dataHandler.getOrgName(orgIdStr, orgNameWrapper);
+        if(orgIdStr!=null)
+            adminOrgIdView.setText(orgIdStr);
+        if(orgNameWrapper.getVal()!=null)
+            adminOrgNameView.setText(orgNameWrapper.getVal());
+    }
+
 
     private void setParseData() {
         ParseUser currentUser = ParseUser.getCurrentUser();

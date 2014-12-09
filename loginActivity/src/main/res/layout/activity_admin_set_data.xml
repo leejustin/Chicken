@@ -25,12 +25,22 @@
         android:layout_alignStart="@+id/orgName"
         android:hint="Organization ID"/>
 
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/orgTime"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/orgId"
+        android:layout_alignLeft="@+id/orgId"
+        android:layout_alignStart="@+id/orgId"
+        android:hint="Time: (ex)MO10-12TU20-22"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next"
         android:id="@+id/next_button"
         android:layout_marginTop="56dp"
-        android:layout_below="@+id/orgId"
+        android:layout_below="@+id/orgTime"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

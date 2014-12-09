@@ -39,7 +39,7 @@ public class UserCheckInActivity extends Activity {
 
     private void checkingOrgRange(String attendingOrg){
         //ARBITRARY RANGE ATM
-        final double range = 3.0; //radius, for now in coordinate degrees
+        final double range = 1.5; //radius, for now in coordinate degrees
 
         //Get user gps coordinates
         GPSManager gps = new GPSManager(UserCheckInActivity.this);

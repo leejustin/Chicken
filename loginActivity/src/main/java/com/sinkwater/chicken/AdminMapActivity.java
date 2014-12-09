@@ -32,12 +32,14 @@ import java.util.List;
 
 public class AdminMapActivity extends Activity implements OnMapLongClickListener, OnMapClickListener, OnMarkerClickListener {
 
-    GoogleMap googleMap;
-    MarkerOptions searchMarkerOptions;
-    LatLng latLng;
-    Button selectButton;
-    String orgName;
-    String orgId;
+    private GoogleMap googleMap;
+    private MarkerOptions searchMarkerOptions;
+    private LatLng latLng;
+    private Button selectButton;
+    private String orgName;
+    private String orgId;
+    private String orgTime;
+    private ParseDataHandler dataHandler;
 
 
     @Override
@@ -54,6 +56,9 @@ public class AdminMapActivity extends Activity implements OnMapLongClickListener
         googleMap.setOnMapClickListener(this);
         googleMap.setOnMapLongClickListener(this);
         googleMap.setOnMarkerClickListener(this);
+
+        //get data handler
+        dataHandler = new ParseDataHandler();
 
         // Get Reference to Find Button
         Button button_find = (Button) findViewById(R.id.string_button_find);
@@ -88,9 +93,11 @@ public class AdminMapActivity extends Activity implements OnMapLongClickListener
         if (extras != null) {
             orgName = extras.getString("orgName");
             orgId = extras.getString("orgId");
+            orgTime = extras.getString("orgTime");
         } else {
             orgName = "default name";
             orgId = "default id";
+            orgTime = "";
         }
     }
 
@@ -103,9 +110,8 @@ public class AdminMapActivity extends Activity implements OnMapLongClickListener
 
     public void updateDB() {
         ParseUser currentUser = ParseUser.getCurrentUser();
-        currentUser.put("organization", orgId); //update the user's organization
-        currentUser.saveInBackground();
-        ParseDataHandler.addOrg(orgName, orgId, searchMarkerOptions.getPosition().latitude, searchMarkerOptions.getPosition().longitude); //add a row in Organization table
+        LatLng latlngObj = new LatLng(searchMarkerOptions.getPosition().latitude, searchMarkerOptions.getPosition().longitude);
+        dataHandler.addOrUpdateOrg(currentUser, orgName, orgId, orgTime, latlngObj);
         loadAdminMenuActivity();
     }
 
