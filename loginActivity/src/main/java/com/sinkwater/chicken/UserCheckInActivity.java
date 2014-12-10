@@ -99,11 +99,12 @@ public class UserCheckInActivity extends Activity {
             public void done(ParseObject userOrg, ParseException e) {
                 //Get current timestamp
                 Calendar c = Calendar.getInstance();
+                String timestamp = c.toString();
                 if(e == null) {
                     //increase attendance by one
                     int attendCount = userOrg.getInt("attendance");
                     userOrg.put("attendance", ++attendCount);
-                    userOrg.put("lastCheckin", c );
+                    userOrg.put("lastCheckin", timestamp );
                     userOrg.saveInBackground();
                     Toast.makeText(getApplicationContext(),
                             "Attendance updated", Toast.LENGTH_LONG).show();
