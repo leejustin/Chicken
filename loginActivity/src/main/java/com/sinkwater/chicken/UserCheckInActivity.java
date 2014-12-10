@@ -14,6 +14,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.lang.Math;
+import java.util.Date;
 
 
 
@@ -87,6 +88,8 @@ public class UserCheckInActivity extends Activity {
         ParseUser currentUser = ParseUser.getCurrentUser();
         String username = currentUser.getUsername();
 
+
+
         //find UserOrg object for this user and organization
         ParseQuery<ParseObject> userOrgQuery = ParseQuery.getQuery("UserOrg");
         userOrgQuery.whereEqualTo("username",username);
@@ -94,13 +97,35 @@ public class UserCheckInActivity extends Activity {
         userOrgQuery.getFirstInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject userOrg, ParseException e) {
+
                 if(e == null) {
-                    //increase attendance by one
-                    int attendCount = userOrg.getInt("attendance");
-                    userOrg.put("attendance", ++attendCount);
-                    userOrg.saveInBackground();
-                    Toast.makeText(getApplicationContext(),
-                            "Attendance updated", Toast.LENGTH_LONG).show();
+                    //Check timestamp
+                    Date currentDate = new Date();
+                    Date lastUpdated = new Date();
+                    lastUpdated = userOrg.getUpdatedAt();
+                    String currentDateString = currentDate.toString();
+                    String lastUpdatedString = lastUpdated.toString();
+                    currentDateString = currentDateString.substring(0,10);
+                    lastUpdatedString = lastUpdatedString.substring(0,10);
+                    boolean sameDate = currentDateString.equals(lastUpdatedString);
+
+                    if( !sameDate || userOrg.getInt("attendance") == 0  )
+                    {
+                        //increase attendance by one
+                        int attendCount = userOrg.getInt("attendance");
+                        userOrg.put("attendance", ++attendCount);
+                        userOrg.saveInBackground();
+                        Toast.makeText(getApplicationContext(),
+                                "Attendance updated", Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),
+                                "You have already checked in!", Toast.LENGTH_LONG).show();
+                    }
+
+
+
+
                 } else{
                     //error
                 }
@@ -126,6 +151,8 @@ public class UserCheckInActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
