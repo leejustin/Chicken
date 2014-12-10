@@ -14,6 +14,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.lang.Math;
+import java.util.Calendar;
 
 
 
@@ -87,6 +88,8 @@ public class UserCheckInActivity extends Activity {
         ParseUser currentUser = ParseUser.getCurrentUser();
         String username = currentUser.getUsername();
 
+
+
         //find UserOrg object for this user and organization
         ParseQuery<ParseObject> userOrgQuery = ParseQuery.getQuery("UserOrg");
         userOrgQuery.whereEqualTo("username",username);
@@ -94,10 +97,13 @@ public class UserCheckInActivity extends Activity {
         userOrgQuery.getFirstInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject userOrg, ParseException e) {
+                //Get current timestamp
+                Calendar c = Calendar.getInstance();
                 if(e == null) {
                     //increase attendance by one
                     int attendCount = userOrg.getInt("attendance");
                     userOrg.put("attendance", ++attendCount);
+                    userOrg.put("lastCheckin", c );
                     userOrg.saveInBackground();
                     Toast.makeText(getApplicationContext(),
                             "Attendance updated", Toast.LENGTH_LONG).show();
@@ -126,6 +132,8 @@ public class UserCheckInActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
