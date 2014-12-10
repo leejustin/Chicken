@@ -108,7 +108,8 @@ public class UserCheckInActivity extends Activity {
                     currentDateString = currentDateString.substring(0,10);
                     lastUpdatedString = lastUpdatedString.substring(0,10);
                     boolean sameDate = currentDateString.equals(lastUpdatedString);
-                    if(!sameDate)
+
+                    if( !sameDate || userOrg.getInt("attendance") == 0  )
                     {
                         //increase attendance by one
                         int attendCount = userOrg.getInt("attendance");
