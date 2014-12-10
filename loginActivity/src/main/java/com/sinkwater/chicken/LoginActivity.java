@@ -63,7 +63,19 @@ public class LoginActivity extends Activity {
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
 			// Go to the user info activity
-			loadAdminMenu();
+            boolean isUserAdmin = currentUser.getBoolean("admin");
+            //if admin w/ or w/out organization
+            if(isUserAdmin){
+                String orgId = currentUser.getString("organization");
+                if(orgId.length()>0){
+                    loadAdminMenu();
+                }else{
+                    loadAdminSetData();
+                }
+            }else{
+                //if user
+                loadUserMenu();
+            }
 		}
 
       //  ParseDataHandler test =  new ParseDataHandler();
