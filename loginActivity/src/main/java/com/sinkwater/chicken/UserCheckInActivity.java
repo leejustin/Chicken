@@ -12,6 +12,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.sinkwater.chicken.validtime_handler.ValidTimeHandler;
 
 import java.lang.Math;
 import java.util.Date;
@@ -21,6 +22,7 @@ import java.util.Date;
 public class UserCheckInActivity extends Activity {
 
     String orgQuery;
+    private ValidTimeHandler timeHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class UserCheckInActivity extends Activity {
         if (extras != null) {
             orgQuery = extras.getString("query");
         }
-
+        timeHandler = new ValidTimeHandler();
         checkingOrgRange(orgQuery);
     }
 
@@ -54,23 +56,39 @@ public class UserCheckInActivity extends Activity {
             @Override
             public void done(ParseObject org, ParseException e) {
                 if(e == null){
-                    //Get organization id and gps coordinates
+                    //Get organization id
+                    //Get gps coordinates
+                    //Get time information
                     String orgId = org.getString("generalId");
                     double orgLat = org.getDouble("latitude");
                     double orgLong = org.getDouble("longitude");
+                    String orgTime = org.getString("time");
+
+                    //For testing purposes, if we forgot to put the time in the database then
+                    //have the org active at all time
+                    if(orgTime == null)
+                        orgTime = "SU00-24MO00-24TU00-24WE00-24TH00-24FR00-24SA00-24";
 
                     //Calculating distance
                     double latComp = Math.pow(orgLat - userLat,2);
                     double longComp = Math.pow(orgLong - userLong,2);
                     double distance = Math.sqrt(latComp+longComp);
+                    //Check if it is a valid time to sign in
+                    boolean validTime = timeHandler.checkValidTime(orgTime);
 
-                    if(distance <= range){
+                    if(!validTime) {
                         Toast.makeText(getApplicationContext(),
-                                "In range for " + orgId, Toast.LENGTH_LONG).show();
-                        updateAttendance(orgId);
-                    } else{
-                        Toast.makeText(getApplicationContext(),
-                                "Not in range for " + orgId + "\nChange location and try again.", Toast.LENGTH_LONG).show();
+                                "Not during the active time for " + orgId + "\nCome back during:\n" + orgTime, Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        if (distance <= range) {
+                            Toast.makeText(getApplicationContext(),
+                                    "In range for " + orgId, Toast.LENGTH_LONG).show();
+                            updateAttendance(orgId);
+                        } else {
+                            Toast.makeText(getApplicationContext(),
+                                    "Not in range for " + orgId + "\nChange location and try again.", Toast.LENGTH_LONG).show();
+                        }
                     }
                     Intent intent = new Intent(UserCheckInActivity.this, UserMenuActivity.class);
                     startActivity(intent);
