@@ -14,7 +14,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.lang.Math;
-import java.util.Calendar;
+import java.util.Date;
 
 
 
@@ -97,17 +97,34 @@ public class UserCheckInActivity extends Activity {
         userOrgQuery.getFirstInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject userOrg, ParseException e) {
-                //Get current timestamp
-                Calendar c = Calendar.getInstance();
-                String timestamp = c.toString();
+
                 if(e == null) {
-                    //increase attendance by one
-                    int attendCount = userOrg.getInt("attendance");
-                    userOrg.put("attendance", ++attendCount);
-                    userOrg.put("lastCheckin", timestamp );
-                    userOrg.saveInBackground();
-                    Toast.makeText(getApplicationContext(),
-                            "Attendance updated", Toast.LENGTH_LONG).show();
+                    //Check timestamp
+                    Date currentDate = new Date();
+                    Date lastUpdated = new Date();
+                    lastUpdated = userOrg.getUpdatedAt();
+                    String currentDateString = currentDate.toString();
+                    String lastUpdatedString = lastUpdated.toString();
+                    currentDateString = currentDateString.substring(5,9);
+                    lastUpdatedString = lastUpdatedString.substring(5,9);
+
+                    if(currentDateString != lastUpdatedString)
+                    {
+                        //increase attendance by one
+                        int attendCount = userOrg.getInt("attendance");
+                        userOrg.put("attendance", ++attendCount);
+                        userOrg.saveInBackground();
+                        Toast.makeText(getApplicationContext(),
+                                "Attendance updated", Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),
+                                "You have already checked in!", Toast.LENGTH_LONG).show();
+                    }
+
+
+
+
                 } else{
                     //error
                 }
