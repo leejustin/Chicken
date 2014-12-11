@@ -117,6 +117,41 @@ public class ParseDataHandler {
             orgNameWrapper.setVal(results.get(0).getString("name"));
     }
 
+    public void getOrgTime(String generalId, WrapperObject<String> orgNameWrapper) {
+
+        ParseQuery<ParseObject> orgQuery = ParseQuery.getQuery("Organization");
+        orgQuery.whereContains("generalId",generalId);
+
+        List<ParseObject> results = null;
+        try {
+            results = orgQuery.find();
+        } catch(ParseException e) {
+            return;
+        }
+        if(results!=null && results.get(0)!=null)
+            orgNameWrapper.setVal(results.get(0).getString("time"));
+    }
+
+    public void getOrgLocation(String generalId, WrapperObject<LatLng> orgNameWrapper) {
+
+        ParseQuery<ParseObject> orgQuery = ParseQuery.getQuery("Organization");
+        orgQuery.whereContains("generalId",generalId);
+
+        List<ParseObject> results = null;
+        try {
+            results = orgQuery.find();
+        } catch(ParseException e) {
+            return;
+        }
+
+        if(results!=null && results.get(0)!=null) {
+            double lat=results.get(0).getDouble("latitude");
+            double lon=results.get(0).getDouble("longitude");
+            LatLng latlngObj = new LatLng(lat, lon);
+            orgNameWrapper.setVal(latlngObj);
+        }
+    }
+
     public static void addUserOrg(String username, String generalId, String displayName) {
 
         //Set up data on user's organization. User should be Parse username key

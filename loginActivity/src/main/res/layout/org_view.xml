@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Failure to load"
+            android:id="@+id/orgOrgName"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25dp"
+            android:layout_margin="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Failure to load organization id"
+            android:textSize="15dp"
+            android:id="@+id/orgOrgId"
+            android:layout_below="@+id/orgOrgName"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anytime"
+            android:textSize="15dp"
+            android:id="@+id/orgOrgTime"
+            android:layout_below="@+id/orgOrgId" />
+
+        <Button
+            android:id="@+id/orgCheckinButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Check-in"
+            android:textSize="20dp"
+            android:layout_below="@+id/orgOrgTime"
+            android:layout_margin="10dp" />
+
+    </RelativeLayout>
+
+        <fragment
+            android:id="@+id/orgMapView"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6" />
+</LinearLayout>

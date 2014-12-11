@@ -62,7 +62,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyC-s2kbC-khDFWJQL4ziUqMxguPUUCczJw" />
+            android:value="AIzaSyCZwb7hymBp-IZPds8XtA86tCDKxEbzEcY" />
 
         <activity
             android:name="com.sinkwater.chicken.AdminMapActivity"
@@ -75,6 +75,10 @@
         <activity
             android:name="com.sinkwater.chicken.UserCheckInActivity"
             android:label="@string/title_activity_user_check_in" >
+        </activity>
+        <activity
+            android:name="com.sinkwater.chicken.OrgViewActivity"
+            android:label="@string/title_activity_org_view" >
         </activity>
     </application>
 

@@ -233,7 +233,9 @@ public class UserMenuActivity extends Activity {
                             //Toast.makeText(getApplicationContext(),"Position: " + itemPosition +
                             //        " ListItem: " + itemValue, Toast.LENGTH_LONG).show();
                             String[] orgId = itemValue.split(" ");
-                            checkIn(orgId[0]);
+
+                            //checkIn(orgId[0]);
+                            loadOrgView(orgId[0]);
                         }
                     });
                 }else{
@@ -252,6 +254,17 @@ public class UserMenuActivity extends Activity {
 
             //Passes query to the activity that will use it to query search results
             Intent intent = new Intent(this, UserOrgSearchActivity.class);
+            intent.putExtra("query", query);
+            startActivity(intent);
+        }
+    }
+
+    private void loadOrgView(String query){
+        //Make sure the string passed in is valid
+        if (query != null || query.length() > 0) {
+
+            //Passes query to the activity that will use it to query search results
+            Intent intent = new Intent(this, OrgViewActivity.class);
             intent.putExtra("query", query);
             startActivity(intent);
         }

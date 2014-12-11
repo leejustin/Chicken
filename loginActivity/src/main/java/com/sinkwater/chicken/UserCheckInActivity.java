@@ -16,7 +16,7 @@ import com.sinkwater.chicken.validtime_handler.ValidTimeHandler;
 
 import java.lang.Math;
 import java.util.Date;
-
+import java.lang.Thread;
 
 
 public class UserCheckInActivity extends Activity {
@@ -83,12 +83,17 @@ public class UserCheckInActivity extends Activity {
                     else {
                         if (distance <= range) {
                             Toast.makeText(getApplicationContext(),
-                                    "In range for " + orgId, Toast.LENGTH_LONG).show();
+                                    "In range for " + orgId, Toast.LENGTH_SHORT).show();
                             updateAttendance(orgId);
                         } else {
                             Toast.makeText(getApplicationContext(),
                                     "Not in range for " + orgId + "\nChange location and try again.", Toast.LENGTH_LONG).show();
                         }
+                    }
+                    try {
+                        Thread.sleep(1500); //for the user to see his/her checking in process
+                    } catch(Exception ex){
+                        //do nth
                     }
                     Intent intent = new Intent(UserCheckInActivity.this, UserMenuActivity.class);
                     startActivity(intent);
