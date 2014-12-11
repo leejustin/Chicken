@@ -5,13 +5,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.sinkwater.chicken.AdminSetDataActivity">
-
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/orgName"
         android:hint="Organization Name"
-        android:layout_centerVertical="true"
+        android:layout_centerVertical="false"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -25,15 +33,83 @@
         android:layout_alignStart="@+id/orgName"
         android:hint="Organization ID"/>
 
-    <EditText
-        android:layout_width="fill_parent"
+    <CheckBox android:id="@+id/sunday"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/orgTime"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/orgId"
-        android:layout_alignLeft="@+id/orgId"
-        android:layout_alignStart="@+id/orgId"
-        android:hint="Time: (ex)MO10-12TU20-22"/>
+        android:text="Su"
+        android:layout_below="@+id/orgID"/>
+    <CheckBox
+        android:id="@+id/monday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="M"
+        android:layout_below="@+id/orgTime"
+        android:layout_toRightOf="@+id/sunday"/>
+    <CheckBox
+        android:id="@+id/tuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T"
+        android:layout_below="@+id/orgTime"
+        android:layout_toRightOf="@+id/monday"/>
+    <CheckBox
+        android:id="@+id/wednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="W"
+        android:layout_below="@+id/orgTime"
+        android:layout_toRightOf="@+id/tuesday"/>
+    <CheckBox
+        android:id="@+id/thursday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Th"
+        android:layout_below="@+id/orgTime"
+        android:layout_toRightOf="@+id/wednesday"/>
+    <CheckBox
+        android:id="@+id/friday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="F"
+        android:layout_below="@+id/orgTime"
+        android:layout_toRightOf="@+id/thursday"/>
+    <CheckBox
+        android:id="@+id/saturday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sa"
+        android:layout_below="@+id/orgTime"
+        android:layout_toRightOf="@+id/friday"/>
+
+    <TextView
+        android:id="@+id/startTimeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Start Time for Check-in"
+        android:layout_below="@+id/saturday"
+        />
+    <TimePicker
+        android:id="@+id/tpStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/startTimeLabel">
+    </TimePicker>
+    <TextView
+        android:id="@+id/endTimeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="End Time for Check-in"
+        android:layout_below="@+id/tpStartTime"
+        />
+    <TimePicker
+        android:id="@+id/tpEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tpStartTime">
+    </TimePicker>
+
 
     <Button
         android:layout_width="wrap_content"
@@ -41,6 +117,10 @@
         android:text="Next"
         android:id="@+id/next_button"
         android:layout_marginTop="15dp"
-        android:layout_below="@+id/orgTime"
+
+        android:layout_below="@+id/tpEndTime"
         android:layout_centerHorizontal="true" />
+        </TableLayout>
+    </ScrollView>
+
 </RelativeLayout>
