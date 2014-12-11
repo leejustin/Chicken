@@ -49,11 +49,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
+        android:src="@drawable/edit"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_above="@+id/orgName"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false"
-        android:src="@drawable/edit"
-        android:paddingBottom="20dp"
-        android:layout_alignParentStart="false" />
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

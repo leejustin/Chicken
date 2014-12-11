@@ -61,11 +61,19 @@
 
 
     <ListView
-        android:layout_width="340dp"
-        android:layout_height="198dp"
+        android:layout_width="300dp"
+        android:layout_height="130dp"
         android:id="@+id/listView"
         android:layout_gravity="center"
         android:background="#FFFFFF"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/updateOrg"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp" />
 
     <Button
@@ -73,17 +81,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="@string/logout"
         android:textColor="#fff"
         android:background="@drawable/button_login"
-        android:layout_gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Update"
-        android:id="@+id/updateOrg"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
