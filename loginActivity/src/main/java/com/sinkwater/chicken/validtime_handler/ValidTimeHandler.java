@@ -29,45 +29,46 @@ public class ValidTimeHandler {
             case Calendar.SUNDAY:
                 if(!(lowercase_time.contains("su")))
                     return false;
-                hour = (lowercase_time.substring(lowercase_time.indexOf("su")+2)).substring(0,2);
-                minute = (lowercase_time.substring(lowercase_time.indexOf("su")+5)).substring(0,2);
+                hour = (lowercase_time.substring(lowercase_time.indexOf("su")+2)).substring(0,5);
+                minute = (lowercase_time.substring(lowercase_time.indexOf("su")+8)).substring(0,5);
                 break;
 
             case Calendar.MONDAY:
                 if(!(lowercase_time.contains("mo")))
                     return false;
-                hour = (lowercase_time.substring(lowercase_time.indexOf("mo")+2)).substring(0,2);
-                minute = (lowercase_time.substring(lowercase_time.indexOf("mo")+5)).substring(0,2);
+                // MO22.12-22.13
+                hour = (lowercase_time.substring(lowercase_time.indexOf("mo")+2)).substring(0,5);
+                minute = (lowercase_time.substring(lowercase_time.indexOf("mo")+8)).substring(0,5);
                 break;
             case Calendar.TUESDAY:
                 if(!(lowercase_time.contains("tu")))
                     return false;
-                hour = (lowercase_time.substring(lowercase_time.indexOf("tu")+2)).substring(0,2);
-                minute = (lowercase_time.substring(lowercase_time.indexOf("tu")+5)).substring(0,2);
+                hour = (lowercase_time.substring(lowercase_time.indexOf("tu")+2)).substring(0,5);
+                minute = (lowercase_time.substring(lowercase_time.indexOf("tu")+8)).substring(0,5);
                 break;
             case Calendar.WEDNESDAY:
                 if(!(lowercase_time.contains("we")))
                     return false;
-                hour = (lowercase_time.substring(lowercase_time.indexOf("we")+2)).substring(0,2);
-                minute = (lowercase_time.substring(lowercase_time.indexOf("we")+5)).substring(0,2);
+                hour = (lowercase_time.substring(lowercase_time.indexOf("we")+2)).substring(0,5);
+                minute = (lowercase_time.substring(lowercase_time.indexOf("we")+8)).substring(0,5);
                 break;
             case Calendar.THURSDAY:
                 if(!(lowercase_time.contains("th")))
                     return false;
-                hour = (lowercase_time.substring(lowercase_time.indexOf("th")+2)).substring(0,2);
-                minute = (lowercase_time.substring(lowercase_time.indexOf("th")+5)).substring(0,2);
+                hour = (lowercase_time.substring(lowercase_time.indexOf("th")+2)).substring(0,5);
+                minute = (lowercase_time.substring(lowercase_time.indexOf("th")+8)).substring(0,5);
                 break;
             case Calendar.FRIDAY:
                 if(!(lowercase_time.contains("fr")))
                     return false;
-                hour = (lowercase_time.substring(lowercase_time.indexOf("fr")+2)).substring(0,2);
-                minute = (lowercase_time.substring(lowercase_time.indexOf("fr")+5)).substring(0,2);
+                hour = (lowercase_time.substring(lowercase_time.indexOf("fr")+2)).substring(0,5);
+                minute = (lowercase_time.substring(lowercase_time.indexOf("fr")+8)).substring(0,5);
                 break;
             case Calendar.SATURDAY:
                 if(!(lowercase_time.contains("sa")))
                     return false;
-                hour = (lowercase_time.substring(lowercase_time.indexOf("sa")+2)).substring(0,2);
-                minute = (lowercase_time.substring(lowercase_time.indexOf("sa")+5)).substring(0,2);
+                hour = (lowercase_time.substring(lowercase_time.indexOf("sa")+2)).substring(0,5);
+                minute = (lowercase_time.substring(lowercase_time.indexOf("sa")+8)).substring(0,5);
                 break;
         }
         double startHour = Double.parseDouble(hour);

@@ -9,6 +9,8 @@ import android.view.View;
 
 import android.content.Context;
 
+import android.widget.CheckBox;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +25,10 @@ public class AdminSetDataActivity extends Activity {
     private EditText orgId;
     private EditText orgTime;
 
+    private CheckBox sunday, monday, tuesday, wednesday, thursday, friday, saturday;
+
+    private TimePicker tpStartTime, tpEndTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,12 @@ public class AdminSetDataActivity extends Activity {
         orgId = (EditText)findViewById(R.id.orgId);
         orgTime = (EditText)findViewById(R.id.orgTime);
 
+        //Sets up TimePickers
+        tpStartTime = (TimePicker) findViewById(R.id.tpStartTime);
+        tpEndTime = (TimePicker) findViewById(R.id.tpEndTime);
+
+        addListenerOnChkDays();
+
         //Sets up the button and its methods
         nextButton = (Button) findViewById(R.id.next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -46,14 +58,76 @@ public class AdminSetDataActivity extends Activity {
         });
     }
 
+    public void addListenerOnChkDays() {
+        sunday = (CheckBox) findViewById(R.id.sunday);
+        monday = (CheckBox) findViewById(R.id.monday);
+        tuesday = (CheckBox) findViewById(R.id.tuesday);
+        wednesday = (CheckBox) findViewById(R.id.wednesday);
+        thursday = (CheckBox) findViewById(R.id.thursday);
+        friday = (CheckBox) findViewById(R.id.friday);
+        saturday = (CheckBox) findViewById(R.id.saturday);
+
+    }
+
     //If text fields aren't null, then we can pass the intent to the next activity
     private void onNextButtonClicked() {
-
         String orgNameText = orgName.getText().toString();
         String orgIdText = orgId.getText().toString();
-        String orgTimeText = orgTime.getText().toString();
+        String orgTimeText = "";
 
-        if (orgNameText.length() > 0 && orgIdText.length() > 0) {
+        String startTimeText = null;
+        String endTimeText = null;
+        String timeText = null;
+
+        String startTimeTextHour = null;
+        String startTimeTextMinute = null;
+        startTimeTextHour = tpStartTime.getCurrentHour().toString();
+        if(tpStartTime.getCurrentHour() < 10)
+            startTimeTextHour = "0"+startTimeTextHour;
+        startTimeTextMinute = tpStartTime.getCurrentMinute().toString();
+        if(tpStartTime.getCurrentMinute() < 10)
+            startTimeTextMinute = "0" + startTimeTextMinute;
+        startTimeText = startTimeTextHour + "." + startTimeTextMinute;
+
+        String endTimeTextHour = null;
+        String endTimeTextMinute = null;
+        endTimeTextHour = tpEndTime.getCurrentHour().toString();
+        if(tpEndTime.getCurrentHour() < 10)
+            endTimeTextHour = "0" + endTimeTextHour;
+        endTimeTextMinute = tpEndTime.getCurrentMinute().toString();
+        if(tpEndTime.getCurrentMinute() < 10)
+            endTimeTextMinute = "0" + endTimeTextMinute;
+        endTimeText = endTimeTextHour + "." + endTimeTextMinute;
+
+        timeText = startTimeText + "-" + endTimeText;
+
+        if(sunday.isChecked()) {
+            orgTimeText = orgTimeText + "SU" + timeText;
+        }
+        if(monday.isChecked()) {
+            orgTimeText = orgTimeText + "MO" + timeText;
+        }
+        if(tuesday.isChecked()) {
+            orgTimeText = orgTimeText + "TU" + timeText;
+        }
+        if(wednesday.isChecked()) {
+            orgTimeText = orgTimeText + "WE" + timeText;
+        }
+        if(thursday.isChecked()) {
+            orgTimeText = orgTimeText + "TH" + timeText;
+        }
+        if(friday.isChecked()) {
+            orgTimeText = orgTimeText + "FR" + timeText;
+        }
+        if(saturday.isChecked()) {
+            orgTimeText = orgTimeText + "SA" + timeText;
+        }
+
+        if (orgNameText.length() > 0 &&
+                orgIdText.length() > 0 &&
+                orgTimeText.length() > 0 &&
+                (tpStartTime.getCurrentHour() < tpEndTime.getCurrentHour() ||
+                        ((tpStartTime.getCurrentHour() == tpEndTime.getCurrentHour()) && tpStartTime.getCurrentMinute()<tpEndTime.getCurrentMinute()))) {
             // Loads up the next activity and also passes data on
             Intent loadGPS = new Intent(this, AdminMapActivity.class);
 
