@@ -67,7 +67,7 @@ public class UserCheckInActivity extends Activity {
                     //For testing purposes, if we forgot to put the time in the database then
                     //have the org active at all time
                     if(orgTime == null)
-                        orgTime = "SU00-24MO00-24TU00-24WE00-24TH00-24FR00-24SA00-24";
+                        orgTime = "SU00.00-24.00MO00.00-24.00TU00.00-24.00WE00.00-24.00TH00.00-24.00FR00.00-24.00SA00.00-24.00";
 
                     //Calculating distance
                     double latComp = Math.pow(orgLat - userLat,2);
@@ -82,8 +82,10 @@ public class UserCheckInActivity extends Activity {
                     }
                     else {
                         if (distance <= range) {
+                            /*
                             Toast.makeText(getApplicationContext(),
                                     "In range for " + orgId, Toast.LENGTH_SHORT).show();
+                            */
                             updateAttendance(orgId);
                         } else {
                             Toast.makeText(getApplicationContext(),
@@ -91,7 +93,7 @@ public class UserCheckInActivity extends Activity {
                         }
                     }
                     try {
-                        Thread.sleep(1500); //for the user to see his/her checking in process
+                        Thread.sleep(1000); //for the user to see his/her checking in process
                     } catch(Exception ex){
                         //do nth
                     }
