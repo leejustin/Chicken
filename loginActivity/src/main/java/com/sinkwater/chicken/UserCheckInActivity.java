@@ -66,8 +66,8 @@ public class UserCheckInActivity extends Activity {
 
                     //For testing purposes, if we forgot to put the time in the database then
                     //have the org active at all time
-                    if(orgTime == null)
-                        orgTime = "SU00-24MO00-24TU00-24WE00-24TH00-24FR00-24SA00-24";
+                    if(orgTime == null || orgTime.length() < 1)
+                        orgTime = "SU00.00-23.59MO00.00-23.59TU00.00-23.59WE00.00-23.59TH00.00-23.59FR00.00-23.59SA00.00-23.59";
 
                     //Calculating distance
                     double latComp = Math.pow(orgLat - userLat,2);

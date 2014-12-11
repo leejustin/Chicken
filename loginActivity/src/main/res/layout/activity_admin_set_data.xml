@@ -5,7 +5,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
 
-    tools:context="com.sinkwater.chicken.AdminSetDataActivity">
+    tools:context="com.sinkwater.chicken.AdminSetDataActivity"
+    android:background="#fff1c232">
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -14,16 +16,29 @@
         android:layout_centerHorizontal="true">
         <TableLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF">
 
-    <EditText
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:layout_above="@+id/scrollView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/edit"
+                android:layout_marginTop="-250dp"
+                android:layout_marginBottom="-200dp" />
+
+            <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/orgName"
         android:hint="Organization Name"
         android:layout_centerVertical="false"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+                android:layout_marginTop="-70dp" />
 
     <EditText
         android:layout_width="fill_parent"
@@ -36,13 +51,14 @@
         android:hint="Organization ID"/>
 
     <CheckBox android:id="@+id/sunday"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:text="Su"
-        android:layout_below="@+id/orgID"/>
+        android:layout_below="@+id/orgID"
+        android:layout_marginTop="25dp" />
     <CheckBox
         android:id="@+id/monday"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:text="M"
         android:layout_below="@+id/orgTime"
@@ -90,7 +106,11 @@
         android:textAlignment="center"
         android:text="Start Time for Check-in"
         android:layout_below="@+id/saturday"
-        />
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="80dp" />
     <TimePicker
         android:id="@+id/tpStartTime"
         android:layout_width="wrap_content"
@@ -99,12 +119,16 @@
     </TimePicker>
     <TextView
         android:id="@+id/endTimeLabel"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="End Time for Check-in"
         android:layout_below="@+id/tpStartTime"
-        />
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="80dp" />
     <TimePicker
         android:id="@+id/tpEndTime"
         android:layout_width="wrap_content"
@@ -122,22 +146,8 @@
 
         android:layout_below="@+id/tpEndTime"
         android:layout_centerHorizontal="true" />
-<<<<<<< HEAD
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/edit"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/orgName"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-=======
         </TableLayout>
     </ScrollView>
->>>>>>> master
 
 </RelativeLayout>
