@@ -50,13 +50,7 @@ public class LoginActivity extends Activity {
 				onLoginButtonClicked();
 			}
 		});
-        adminMapButton = (Button) findViewById(R.id.AdminMapButton);
-        adminMapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onAdminMapClicked();
-            }
-        });
+
 
 		// Check if there is a currently logged in user
 		// and it's linked to a Facebook account.

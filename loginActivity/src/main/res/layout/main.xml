@@ -3,35 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1">
-    
-    <TextView
+    android:weightSum="1"
+    android:background="#fff1c232">
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:gravity="center"
-        android:text="@string/login_intro"
-        android:textSize="18sp" />
-    
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/chicken_icon"
+        android:layout_marginTop="75dp"
+        android:layout_marginLeft="15dp" />
 
-    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="CHICKEN"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
         android:text="@string/login"
         android:textColor="#fff"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/button_login"
         />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:text="AdminMap"
-        android:id="@+id/AdminMapButton"
-        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
